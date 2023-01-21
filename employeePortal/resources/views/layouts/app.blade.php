@@ -30,9 +30,11 @@
                             <a href="{{ route('dashboard') }}"><li class="{{ (request()->segment(1) == 'dashboard') ? 'bg-violet-700 border-violet-700': '' }} px-3 py-1 flex space-x-2 mt-10 rounded-md border border-violet-500 cursor-pointer hover:bg-violet-600 hover:border-violet-700">					
                                 <span class="font-semibold"><i class="fa fa-home"></i> Dashboard</span>
                             </li></a>
+                            @if (auth()->user()->type == 'Admin')
                             <a href="{{ route('employees.index') }}"><li class="{{ (request()->segment(1) == 'employees') ? 'bg-violet-700 border-violet-700': '' }} px-3 py-1 flex space-x-2 mt-5 rounded-md border border-violet-500 cursor-pointer hover:bg-violet-600 hover:border-violet-700">					
                                 <span class="font-semibold"><i class="fa-solid fa-users"></i> Employees</span>
                             </li></a>
+                            @endif
                             <a href=""><li class="{{ (request()->segment(1) == 'customers') ? 'bg-violet-700 border-violet-700': '' }} px-3 py-1 flex space-x-2 mt-5 rounded-md border border-violet-500 cursor-pointer hover:bg-violet-600 hover:border-violet-700">					
                                 <span class="font-semibold"><i class="fa-sharp fa-solid fa-handshake"></i> Customers</span>
                             </li></a>

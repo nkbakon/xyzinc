@@ -55,16 +55,10 @@
                     Category
                 </th>
                 <th class="py-3 px-6">
-                    Color                                        
-                </th>
-                <th class="py-3 px-6">
                     Image                                        
                 </th>
                 <th class="py-3 px-6">
-                    Stock                                        
-                </th>
-                <th class="py-3 px-6">
-                    Price                                        
+                    Price ($)                                        
                 </th>
                 <th class="py-3 px-6">
                     Actions
@@ -83,13 +77,13 @@
                 <td class="py-4 px-6">
                     {{ $product->category }}
                 </td>                
-                <td class="py-4 px-6">
+                <td class="hidden">
                     {{ $product->color }}                                   
                 </td>
                 <td class="py-4 px-6">
-                    <img src="{{ asset($product->img) }}" width="100px" height="100px" />                                  
+                    <img src="{{ asset($product->img) }}" width="75px" height="75px" />                                  
                 </td>
-                <td class="py-4 px-6">
+                <td class="hidden">
                     {{ $product->stock }}                                   
                 </td>
                 <td class="py-4 px-6">
@@ -98,10 +92,13 @@
                 <td class="hidden">
                     {{ $product->description }}
                 </td>
+                <td class="hidden">
+                    {{ $product->img }}
+                </td>
                 <td class="py-4 px-6">
-                    <a href="" class="inline-flex items-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:bg-yellow-700 active:bg-yellow-900 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition ease-in-out duration-150" >Edit</a>
+                    <a href="{{ route('products.edit', $product) }}" class="inline-flex items-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:bg-yellow-700 active:bg-yellow-900 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition ease-in-out duration-150" >Edit</a>
                     <button type="button" data-modal-toggle="viewData" class="viewBtn inline-flex items-center px-4 py-2 bg-gray-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-600 active:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">View</button>
-                    <button type="button" value="{{ $product->id }}" data-modal-toggle="deleteData" class="deleteBtn inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">Delete</button>
+                    <button type="button" data-modal-toggle="deleteData" class="deleteBtn inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">Delete</button>
                 </td>
             </tr>
             @endforeach
@@ -126,10 +123,15 @@
             <div class="p-6">
                 <h3 class="mb-5 text-center text-xl font-normal text-gray-700 dark:text-gray-400"><span id="view_name"></span></h3>
                 <div>
+                    <div class="flex items-center justify-center">
+                        <img id="view_img" width="250px" height="250px" />
+                    </div><br>
                     <strong>ID : </strong><span id="view_id"></span><br> 
-                    <strong>Quantity : </strong><span id="view_quantity"></span><br>
-                    <strong>Description : </strong><span id="view_description"></span><br>
-                    <strong>Status : </strong><span id="view_status"></span><br> 
+                    <strong>Category : </strong><span id="view_category"></span><br>
+                    <strong>Color : </strong><span id="view_color"></span><br>
+                    <strong>Available Stock : </strong><span id="view_stock"></span><br>
+                    <strong>Selling Price : </strong>USD $<span id="view_price"></span><br>
+                    <strong>Description : </strong><span id="view_description"></span><br> 
                 </div>                                
             </div>
         </div>
@@ -145,12 +147,13 @@
                 <span class="sr-only">Close modal</span>
             </button>
             <div class="p-6 text-center">
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('products.destroy', 'data_id', 'delete_img') }}">
                     @csrf
                     @method('DELETE')
                     <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this data?</h3>
-                    <input type="hidden" name="data_id"  id="data_id">                        
+                    <input type="hidden" name="data_id"  id="data_id"> 
+                    <input type="hidden" name="delete_img"  id="delete_img">                        
                     <button type="submit" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                         Yes, Delete
                     </button>
@@ -163,14 +166,21 @@
 
 @push('deleteDataId')
     <script>
-        $(document).ready(function () {
-            $('.deleteBtn').click(function (e){
-                e.preventDefault();
-                
-                var data_id = $(this).val();
-                $('#data_id').val(data_id);
-            });
+    $(document).ready(function(){
+        $('.deleteBtn').on('click', function(){
+            
+
+            $tr = $(this).closest('tr');
+
+            var data = $tr.children("td").map(function() {
+                return $(this).text();      
+
+            }).get();
+
+            $('#data_id').val(data[0].trim());
+            $('#delete_img').val(data[8].trim());
         });
+    });
     </script>
 @endpush
 
@@ -191,23 +201,13 @@ $(document).ready(function(){
         
         document.getElementById('view_id').innerHTML = data[0];
         document.getElementById('view_name').innerHTML = data[1];
-        document.getElementById('view_quantity').innerHTML = data[2];
-        document.getElementById('view_status').innerHTML = data[3];
-        document.getElementById('view_description').innerHTML = data[4];
+        document.getElementById('view_category').innerHTML = data[2];
+        document.getElementById('view_color').innerHTML = data[3];        
+        document.getElementById('view_stock').innerHTML = data[5];
+        document.getElementById('view_price').innerHTML = data[6];
+        document.getElementById('view_description').innerHTML = data[7];
+        document.getElementById('view_img').src = data[8];
     });
 });
 </script>
-@endpush
-
-@push('addDataId')
-    <script>
-        $(document).ready(function () {
-            $('.addBtn').click(function (e){
-                e.preventDefault();
-                
-                var adddata_id = $(this).val();
-                $('#adddata_id').val(adddata_id);
-            });
-        });
-    </script>
 @endpush

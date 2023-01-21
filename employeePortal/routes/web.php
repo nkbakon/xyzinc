@@ -18,6 +18,11 @@ use \App\Http\Controllers\ProductController;
 |
 */
 
+Route::get('home', function () {
+    return view('home');
+})->name('home');
+
+
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/', [AuthController::class, 'loginPost'])->name('login.post');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

@@ -37,7 +37,7 @@
     @error('stock') <span class="text-red-500 error">{{ $message }}</span><br> @enderror
     <br>
     <div>
-        <label for="price">Product Selling Price</label><br>
+        <label for="price">Product Selling Price ($)</label><br>
         <input type="text" name="price" class="block w-96 appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="product selling price" wire:model="price" required>
     </div>
     @error('price') <span class="text-red-500 error">{{ $message }}</span><br> @enderror
