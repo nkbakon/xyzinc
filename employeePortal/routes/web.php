@@ -5,6 +5,7 @@ use \App\Http\Controllers\AuthController;
 use \App\Http\Controllers\EmployeeController;
 use \App\Http\Controllers\ProfileController;
 use \App\Http\Controllers\PasswordController;
+use \App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::resource('products', ProductController::class);
 
     Route::group(['middleware' => ['useradmin']], function() {
         Route::resource('employees', EmployeeController::class);
