@@ -15,15 +15,15 @@ class AuthController extends Controller
 
     function loginPost(Request $request){
         $request->validate([
-            'username' => 'required',
+            'email' => 'required',
             'password' => 'required'
         ]);
 
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('email', 'password');
         if(Auth::attempt($credentials) && (auth()->user()->status == 'Active')){
             return redirect()->intended(route('dashboard'));
         }
-        else if(Auth::attempt($credentials) && (auth()->user()->status == 'Deactivated')){
+        else if(Auth::attempt($credentials) && (auth()->user()->status == 'Deactivate')){
             return redirect()->route('login')->with('err', 'Your account is deactivated, please contact Admin.');
         }
         return redirect()->route('login')->with('err', 'Invalid username or password');

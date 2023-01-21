@@ -20,8 +20,29 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'type',
+        'status',
         'password',
     ];
+
+    public static function search($search)
+    {
+        return empty($search)
+        ? static::query()
+        : static::query()->where('id', 'like', '%' . $search . '%')
+            ->orWhere('name', 'like', '%' . $search . '%')
+            ->orWhere('email', 'like', '%' . $search . '%')
+            ->orWhere('type', 'like', '%' . $search . '%')
+            ->orWhere('status', 'like', '%' . $search . '%');
+    }
+
+    public function getStatusColorAttribute()
+    {
+        return [
+            'Active' => 'green',
+            'Deactivate' => 'red',
+        ][$this->status] ?? 'cool-gray';
+    }
 
     /**
      * The attributes that should be hidden for serialization.

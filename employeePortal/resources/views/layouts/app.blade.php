@@ -30,7 +30,7 @@
                             <a href="{{ route('dashboard') }}"><li class="{{ (request()->segment(1) == 'dashboard') ? 'bg-violet-700 border-violet-700': '' }} px-3 py-1 flex space-x-2 mt-10 rounded-md border border-violet-500 cursor-pointer hover:bg-violet-600 hover:border-violet-700">					
                                 <span class="font-semibold"><i class="fa fa-home"></i> Dashboard</span>
                             </li></a>
-                            <a href=""><li class="{{ (request()->segment(1) == 'employees') ? 'bg-violet-700 border-violet-700': '' }} px-3 py-1 flex space-x-2 mt-5 rounded-md border border-violet-500 cursor-pointer hover:bg-violet-600 hover:border-violet-700">					
+                            <a href="{{ route('employees.index') }}"><li class="{{ (request()->segment(1) == 'employees') ? 'bg-violet-700 border-violet-700': '' }} px-3 py-1 flex space-x-2 mt-5 rounded-md border border-violet-500 cursor-pointer hover:bg-violet-600 hover:border-violet-700">					
                                 <span class="font-semibold"><i class="fa-solid fa-users"></i> Employees</span>
                             </li></a>
                             <a href=""><li class="{{ (request()->segment(1) == 'customers') ? 'bg-violet-700 border-violet-700': '' }} px-3 py-1 flex space-x-2 mt-5 rounded-md border border-violet-500 cursor-pointer hover:bg-violet-600 hover:border-violet-700">					
@@ -54,5 +54,8 @@
         <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
         <livewire:scripts />
+        @stack('passwordvalidate')
+        @stack('viewDataModal')
+        @stack('deleteDataId')
     </body>
 </html>
