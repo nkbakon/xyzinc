@@ -26,5 +26,11 @@ class CustomerLoginController extends Controller
         }
         return redirect()->route('sitelogin.index')->with('delete', 'Invalid username or password');
     }
+
+    function logout(){
+        Session::flush();
+        Auth::logout();
+        return redirect()->route('site.index');
+    }
     
 }

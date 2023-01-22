@@ -13,4 +13,9 @@ class SiteController extends Controller
         
         return view('site.index', compact('products'));
     }
+
+    public function edit(Product $product)
+    {
+        return view('site.view', compact('product'));
+    }
 }

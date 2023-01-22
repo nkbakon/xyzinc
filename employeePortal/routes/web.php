@@ -21,10 +21,14 @@ use \App\Http\Controllers\CustomerLoginController;
 |
 */
 
-Route::resource('site', SiteController::class);
+Route::resource('site', SiteController::class)->except('show');
+Route::get('site/{product}/', [SiteController::class, 'edit'])->name('site.edit');
 Route::resource('register', CustomerRegisterController::class);
+
 Route::get('sitelogin', [CustomerLoginController::class, 'index'])->name('sitelogin.index');
 Route::post('sitelogin', [CustomerLoginController::class, 'login'])->name('sitelogin.login');
+Route::get('sitelogout', [CustomerLoginController::class, 'logout'])->name('sitelogin.logout');
+
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/', [AuthController::class, 'loginPost'])->name('login.post');
