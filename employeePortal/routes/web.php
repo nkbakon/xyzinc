@@ -9,21 +9,17 @@ use \App\Http\Controllers\ProductController;
 use \App\Http\Controllers\SiteController;
 use \App\Http\Controllers\CustomerRegisterController;
 use \App\Http\Controllers\CustomerLoginController;
+use \App\Http\Controllers\CartController;
+use \App\Http\Controllers\CustomerController;
+use \App\Http\Livewire\Products\ProductView;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::resource('site', SiteController::class)->except('show');
-Route::get('site/{product}/', [SiteController::class, 'edit'])->name('site.edit');
+Route::resource('site', SiteController::class);
+Route::get('site/{product}/', [SiteController::class, 'show'])->name('site.show');
+Route::post('site/{id}', [ProductView::class, 'store']);
 Route::resource('register', CustomerRegisterController::class);
+
+Route::resource('cart', CartController::class);
 
 Route::get('sitelogin', [CustomerLoginController::class, 'index'])->name('sitelogin.index');
 Route::post('sitelogin', [CustomerLoginController::class, 'login'])->name('sitelogin.login');
@@ -39,6 +35,7 @@ Route::group(['middleware' => ['auth']], function() {
         return view('dashboard');
     })->name('dashboard');
     Route::resource('products', ProductController::class);
+    Route::resource('customers', CustomerController::class);
 
     Route::group(['middleware' => ['useradmin']], function() {
         Route::resource('employees', EmployeeController::class);

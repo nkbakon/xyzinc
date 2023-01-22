@@ -14,8 +14,9 @@ class SiteController extends Controller
         return view('site.index', compact('products'));
     }
 
-    public function edit(Product $product)
+    public function show($product)
     {
+        $product = Product::find($product);
         return view('site.view', compact('product'));
     }
 }

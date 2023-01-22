@@ -36,7 +36,7 @@
         </div>
         <div class="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
         @if(Auth::guard('customers')->check())
-          <a href="" class="text-gray-900 hover:text-gray-900"><i class="fa-solid fa-cart-shopping"></i>&nbsp;Cart(0)</a>
+          <a href="{{ route('cart.index') }}" class="text-gray-900 hover:text-gray-900"><i class="fa-solid fa-cart-shopping"></i>&nbsp;Cart(0)</a>
           <div class="hidden md:block">
             <div class="ml-4 flex items-center md:ml-6">
               <!-- Profile dropdown -->
@@ -92,7 +92,7 @@
               </div>
               <div class="py-6">
                 @if(Auth::guard('customers')->check())
-                  <a href="" class="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10">Log Out</a>
+                  <a href="{{ route('sitelogin.logout') }}" class="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10">Log Out</a>
                 @else
                   <a href="{{ route('sitelogin.index') }}" class="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10">Log in</a>
                 @endif                

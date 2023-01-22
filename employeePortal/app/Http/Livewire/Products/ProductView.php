@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Products;
 
 use Livewire\Component;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ProductView extends Component
 {
@@ -11,19 +13,28 @@ class ProductView extends Component
     public $productid;
     public $stock;
     public $quantity;
+    public $price;
+    public $errors;
 
-    public function addToCart(int $productId)
+    public function mount($product)
     {
-        if(Auth::guard('customers')->check()){
-            dd('Added to the cart');
+        $this->product = $product;
+        $this->stock = $this->product->stock;        
+    }
+
+    public function store()
+    {   
+        $data['customer_id'] = Auth::guard('customers')->user()->id;
+        $data['product_id'] = $this->productid;
+        $data['stock'] = $this->quantity;
+        $data['price'] = $this->price;
+
+        $cart = Cart::create($data);
+        if($cart){
+            return redirect()->route('site.view')->with('status', 'Product add to cart successfully.');  
         }
-        else{
-            $this->dispatchBrowserEvent('message', [
-                'text' => 'Login to continue',
-                'type' => 'info',
-                'status' => 401
-            ]);
-        }
+        return redirect()->route('site.view')->with('delete', 'Product adding faild, try again.');       
+        
     }
     
     public function render()
