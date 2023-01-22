@@ -14,7 +14,7 @@
     <div>
       <nav class="flex h-9 items-center justify-between" aria-label="Global">
         <div class="flex lg:min-w-0 lg:flex-1" aria-label="Global">
-          <a href="{{ route('home') }}" class="-m-1.5 p-1.5">
+          <a href="{{ route('site.index') }}" class="-m-1.5 p-1.5">
             <h3 class="items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-violet-600 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-violet-800 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">XYZ Inc.</h3>
           </a>
         </div>
@@ -28,7 +28,7 @@
           </button>
         </div>
         <div class="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12">
-          <a href="{{ route('home') }}" class="font-semibold text-gray-900 hover:text-gray-900">Home</a>
+          <a href="{{ route('site.index') }}" class="font-semibold text-gray-900 hover:text-gray-900">Home</a>
 
           <a href="#" class="font-semibold text-gray-900 hover:text-gray-900">About Us</a>
 
@@ -37,7 +37,7 @@
           <a href="#" class="font-semibold text-gray-900 hover:text-gray-900">Contact Us</a>
         </div>
         <div class="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
-          <a href="#" class="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20">Log in</a>
+          <a href="{{ route('sitelogin.index') }}" class="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20">Log in</a>
         </div>
       </nav>
       <!-- Mobile menu, show/hide based on menu open state. -->
@@ -45,7 +45,7 @@
         <div focus="true" class="fixed inset-0 z-10 overflow-y-auto bg-white px-6 py-6 lg:hidden">
           <div class="flex h-9 items-center justify-between">
             <div class="flex">
-                <a href="{{ route('home') }}" class="-m-1.5 p-1.5">
+                <a href="{{ route('site.index') }}" class="-m-1.5 p-1.5">
                     <h3 class="items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-violet-600 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-violet-800 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">XYZ Inc.</h3>
                 </a>
             </div>
@@ -62,7 +62,7 @@
           <div class="mt-6 flow-root">
             <div class="-my-6 divide-y divide-gray-500/10">
               <div class="space-y-2 py-6">
-                <a href="{{ route('home') }}" class="font-semibold text-gray-900 hover:text-gray-900">Home</a>
+                <a href="{{ route('site.index') }}" class="font-semibold text-gray-900 hover:text-gray-900">Home</a>
 
                 <a href="#" class="font-semibold text-gray-900 hover:text-gray-900">About Us</a>
 

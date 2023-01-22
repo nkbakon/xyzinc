@@ -6,6 +6,9 @@ use \App\Http\Controllers\EmployeeController;
 use \App\Http\Controllers\ProfileController;
 use \App\Http\Controllers\PasswordController;
 use \App\Http\Controllers\ProductController;
+use \App\Http\Controllers\SiteController;
+use \App\Http\Controllers\CustomerRegisterController;
+use \App\Http\Controllers\CustomerLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +21,9 @@ use \App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('home', function () {
-    return view('home');
-})->name('home');
-
+Route::resource('site', SiteController::class);
+Route::resource('register', CustomerRegisterController::class);
+Route::resource('sitelogin', CustomerLoginController::class);
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/', [AuthController::class, 'loginPost'])->name('login.post');

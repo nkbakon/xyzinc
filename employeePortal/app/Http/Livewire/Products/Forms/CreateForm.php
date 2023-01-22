@@ -22,7 +22,7 @@ class CreateForm extends Component
         'name' => 'required',
         'category' => 'required',
         'color' => 'required',
-        'img' => 'required|image',
+        'img' => 'required',
         'stock' => 'required',
         'price' => 'required',
     ];
