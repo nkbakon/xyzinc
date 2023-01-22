@@ -12,7 +12,18 @@
         <a href="{{ route('register.index') }}" class="font-medium text-indigo-600 hover:text-indigo-500">register</a>
       </p>
     </div>
-    <form class="mt-8 space-y-6" action="#" method="POST">
+    @if (session('status'))
+      <div class="text-black m-2 p-4 bg-green-200">
+        {{ session('status') }}
+      </div>
+    @endif
+    @if (session('delete'))
+      <div class="text-black m-2 p-4 bg-red-200">
+        {{ session('delete') }}
+      </div>
+    @endif
+    <form class="mt-8 space-y-6" action="{{ route('sitelogin.login') }}" method="POST">
+      @csrf
       <div class="-space-y-px rounded-md shadow-sm">
         <div>
           <label for="email" class="sr-only">Email address</label>

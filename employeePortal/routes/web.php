@@ -23,7 +23,8 @@ use \App\Http\Controllers\CustomerLoginController;
 
 Route::resource('site', SiteController::class);
 Route::resource('register', CustomerRegisterController::class);
-Route::resource('sitelogin', CustomerLoginController::class);
+Route::get('sitelogin', [CustomerLoginController::class, 'index'])->name('sitelogin.index');
+Route::post('sitelogin', [CustomerLoginController::class, 'login'])->name('sitelogin.login');
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/', [AuthController::class, 'loginPost'])->name('login.post');
