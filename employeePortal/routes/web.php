@@ -11,6 +11,7 @@ use \App\Http\Controllers\CustomerRegisterController;
 use \App\Http\Controllers\CustomerLoginController;
 use \App\Http\Controllers\CartController;
 use \App\Http\Controllers\CustomerController;
+use \App\Http\Controllers\OrderController;
 use \App\Http\Livewire\Products\ProductView;
 
 
@@ -36,6 +37,7 @@ Route::group(['middleware' => ['auth']], function() {
     })->name('dashboard');
     Route::resource('products', ProductController::class);
     Route::resource('customers', CustomerController::class);
+    Route::resource('orders', OrderController::class);
 
     Route::group(['middleware' => ['useradmin']], function() {
         Route::resource('employees', EmployeeController::class);

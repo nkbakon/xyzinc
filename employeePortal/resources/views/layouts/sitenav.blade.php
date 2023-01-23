@@ -36,7 +36,7 @@
         </div>
         <div class="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
         @if(Auth::guard('customers')->check())
-          <a href="{{ route('cart.index') }}" class="text-gray-900 hover:text-gray-900"><i class="fa-solid fa-cart-shopping"></i>&nbsp;Cart(0)</a>
+          <a href="{{ route('cart.index') }}" class="text-gray-900 hover:text-gray-900"><i class="fa-solid fa-cart-shopping"></i>&nbsp;Cart({{ Session::get('cart_count') }})</a>
           <div class="hidden md:block">
             <div class="ml-4 flex items-center md:ml-6">
               <!-- Profile dropdown -->
